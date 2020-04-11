@@ -8,7 +8,7 @@ Resources:
     Type: AWS::ElasticBeanstalk::ApplicationVersion
     Properties:
       ApplicationName:
-        Ref: companyNewsApp
+        Ref: companyNewsAppProd
       Description: AWS Elastic Beanstalk PROD setup for CompanyNews
       SourceBundle:
         S3Bucket: !Sub "elasticbeanstalk-companynews-${AWS::Region}"
@@ -17,7 +17,7 @@ Resources:
     Type: AWS::ElasticBeanstalk::ConfigurationTemplate
     Properties:
       ApplicationName:
-        Ref: companyNewsApp
+        Ref: companyNewsAppProd
       Description: AWS Elastic Beanstalk PROD setup for CompanyNews
       OptionSettings:
       - Namespace: aws:autoscaling:asg
@@ -29,14 +29,14 @@ Resources:
       - Namespace: aws:elasticbeanstalk:environment
         OptionName: EnvironmentType
         Value: LoadBalanced
-      SolutionStackName: solution-stack
+      SolutionStackName: companynews-prod-stack
   companyNewsEnvironment:
     Type: AWS::ElasticBeanstalk::Environment
     Properties:
       ApplicationName:
-        Ref: companyNewsApp
+        Ref: companyNewsAppProd
       Description: AWS Elastic Beanstalk PROD setup for CompanyNews
       TemplateName:
-        Ref: companyNewsCnfTemplate
+        Ref: companyNewsCnfTemplateProd
       VersionLabel:
-        Ref: companyNewsAppVersion
+        Ref: companyNewsAppProdVersion
