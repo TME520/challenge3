@@ -1,0 +1,42 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  companyNewsApp:
+    Type: AWS::ElasticBeanstalk::Application
+    Properties:
+      Description: AWS Elastic Beanstalk PROD setup for CompanyNews
+  companyNewsAppVersion:
+    Type: AWS::ElasticBeanstalk::ApplicationVersion
+    Properties:
+      ApplicationName:
+        Ref: companyNewsApp
+      Description: AWS Elastic Beanstalk PROD setup for CompanyNews
+      SourceBundle:
+        S3Bucket: !Sub "elasticbeanstalk-companynews-${AWS::Region}"
+        S3Key: company-news.war
+  companyNewsCnfTemplate:
+    Type: AWS::ElasticBeanstalk::ConfigurationTemplate
+    Properties:
+      ApplicationName:
+        Ref: companyNewsApp
+      Description: AWS Elastic Beanstalk PROD setup for CompanyNews
+      OptionSettings:
+      - Namespace: aws:autoscaling:asg
+        OptionName: MinSize
+        Value: '2'
+      - Namespace: aws:autoscaling:asg
+        OptionName: MaxSize
+        Value: '6'
+      - Namespace: aws:elasticbeanstalk:environment
+        OptionName: EnvironmentType
+        Value: LoadBalanced
+      SolutionStackName: solution-stack
+  companyNewsEnvironment:
+    Type: AWS::ElasticBeanstalk::Environment
+    Properties:
+      ApplicationName:
+        Ref: companyNewsApp
+      Description: AWS Elastic Beanstalk PROD setup for CompanyNews
+      TemplateName:
+        Ref: companyNewsCnfTemplate
+      VersionLabel:
+        Ref: companyNewsAppVersion
