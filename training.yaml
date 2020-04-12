@@ -1,24 +1,38 @@
 AWSTemplateFormatVersion: '2010-09-09'
+Description: >-
+  AWS CloudFormation Template "training": This CloudFormation template creates 1 Elastic Beanstalk stack runnning TOMCAT + create a S3 bucket for static content.
+Parameters:
+  EnvironmentName:
+    Description: An environment name that will be added to resource descriptions
+    Type: String
+    Default: training
+    AllowedValues:
+      - training
+      - production
+  EnvironmentLocation:
+    Description: Name of the AWS region that is being used
+    Type: String
+    Default: ap-southeast-2
 Resources:
   companyNewsApplication:
     Type: AWS::ElasticBeanstalk::Application
     Properties:
-      Description: AWS Elastic Beanstalk Company News Training Application
+      Description: AWS Elastic Beanstalk Company News ${EnvironmentName} Application
   companyNewsVersion:
     Type: AWS::ElasticBeanstalk::ApplicationVersion
     Properties:
       ApplicationName:
         Ref: companyNewsApplication
-      Description: AWS ElasticBeanstalk Company News Training Application Version
+      Description: AWS ElasticBeanstalk Company News ${EnvironmentName} Application Version
       SourceBundle:
-        S3Bucket: !Sub "elasticbeanstalk-companynews-${AWS::Region}"
+        S3Bucket: !Sub "elasticbeanstalk-companynews-${EnvironmentLocation}"
         S3Key: company-news.war
   companyNewsCnfTemplate:
     Type: AWS::ElasticBeanstalk::ConfigurationTemplate
     Properties:
       ApplicationName:
         Ref: companyNewsApplication
-      Description: AWS ElasticBeanstalk Company News Training Configuration Template
+      Description: AWS ElasticBeanstalk Company News ${EnvironmentName} Configuration Template
       OptionSettings:
       - Namespace: aws:autoscaling:asg
         OptionName: MinSize
@@ -35,7 +49,7 @@ Resources:
     Properties:
       ApplicationName:
         Ref: companyNewsApplication
-      Description: AWS ElasticBeanstalk Company News Training Environment
+      Description: AWS ElasticBeanstalk Company News ${EnvironmentName} Environment
       TemplateName:
         Ref: companyNewsCnfTemplate
       VersionLabel:
