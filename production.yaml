@@ -2,6 +2,10 @@ AWSTemplateFormatVersion: '2010-09-09'
 Description: >-
   AWS CloudFormation Template "production": This CloudFormation template creates 1 Elastic Beanstalk stack runnning TOMCAT + create a S3 bucket for static content.
 Parameters:
+  BucketName:
+    Description: The name of the S3 Bucket to create
+    Type: String
+    Default: company-news-static-assets-production
   EnvironmentName:
     Description: An environment name that will be added to resource descriptions
     Type: String

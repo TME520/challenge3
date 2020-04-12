@@ -2,6 +2,10 @@ AWSTemplateFormatVersion: '2010-09-09'
 Description: >-
   AWS CloudFormation Template "training": This CloudFormation template creates 1 Elastic Beanstalk stack runnning TOMCAT + create a S3 bucket for static content.
 Parameters:
+  BucketName:
+    Description: The name of the S3 Bucket to create
+    Type: String
+    Default: company-news-static-assets-training
   EnvironmentName:
     Description: An environment name that will be added to resource descriptions
     Type: String
@@ -14,6 +18,26 @@ Parameters:
     Type: String
     Default: ap-southeast-2
 Resources:
+  WebsiteBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: ${BucketName}
+      AccessControl: PublicRead
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: 404.html
+    DeletionPolicy: Retain
+  WebsiteBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref 'WebsiteBucket'
+      PolicyDocument:
+        Statement:
+        - Sid: PublicReadForGetBucketObjects
+          Effect: Allow
+          Principal: '*'
+          Action: s3:GetObject
+          Resource: !Join ['', ['arn:aws:s3:::', !Ref 'WebsiteBucket', /*]]
   companyNewsApplication:
     Type: AWS::ElasticBeanstalk::Application
     Properties:
@@ -54,3 +78,7 @@ Resources:
         Ref: companyNewsCnfTemplate
       VersionLabel:
         Ref: companyNewsVersion
+Outputs:
+  WebsiteURL:
+    Value: !GetAtt WebsiteBucket.WebsiteURL
+    Description: URL for website hosted on S3
