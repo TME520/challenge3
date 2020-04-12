@@ -18,26 +18,31 @@ Parameters:
     Type: String
     Default: ap-southeast-2
 Resources:
-  WebsiteBucket:
+  S3Bucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: ${BucketName}
       AccessControl: PublicRead
       WebsiteConfiguration:
         IndexDocument: index.html
-        ErrorDocument: 404.html
+        ErrorDocument: error.html
     DeletionPolicy: Retain
-  WebsiteBucketPolicy:
+  BucketPolicy:
     Type: AWS::S3::BucketPolicy
     Properties:
-      Bucket: !Ref 'WebsiteBucket'
       PolicyDocument:
+        Id: MyPolicy
+        Version: 2012-10-17
         Statement:
-        - Sid: PublicReadForGetBucketObjects
-          Effect: Allow
-          Principal: '*'
-          Action: s3:GetObject
-          Resource: !Join ['', ['arn:aws:s3:::', !Ref 'WebsiteBucket', /*]]
+          - Sid: PublicReadForGetBucketObjects
+            Effect: Allow
+            Principal: '*'
+            Action: 's3:GetObject'
+            Resource: !Join 
+              - ''
+              - - 'arn:aws:s3:::'
+                - !Ref S3Bucket
+                - /*
+      Bucket: !Ref S3Bucket
   companyNewsApplication:
     Type: AWS::ElasticBeanstalk::Application
     Properties:
@@ -80,5 +85,15 @@ Resources:
         Ref: companyNewsVersion
 Outputs:
   WebsiteURL:
-    Value: !GetAtt WebsiteBucket.WebsiteURL
+    Value: !GetAtt 
+      - S3Bucket
+      - WebsiteURL
     Description: URL for website hosted on S3
+  S3BucketSecureURL:
+    Value: !Join 
+      - ''
+      - - 'https://'
+        - !GetAtt 
+          - S3Bucket
+          - DomainName
+    Description: Name of S3 bucket to hold website content
