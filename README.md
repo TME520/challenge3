@@ -17,8 +17,17 @@ Deploy a WAR file + static content in AWS using CloudFormation.
 - 1 AWS S3 bucket named *elasticbeanstalk-companynews-ap-southeast-2*
 - Upload the WAR file *company-news.war* into the S3 bucket *elasticbeanstalk-companynews-ap-southeast-2*
 ## Setting up your environment
+> I recommend using Linux; the instructions provided in this file are targeted at this line of OSes.
+> Windows users can either use the [Windows sub-system for Ubuntu](https://docs.microsoft.com/en-us/windows/wsl/install-win10) or install [Cygwin](https://cygwin.com).
+- Install [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
+- Clone the [challenge3 GitHub repository](https://github.com/TME520/challenge3): `git clone https://github.com/TME520/challenge3.git`
+- Open a terminal and move to the `challenge3` folder
+- Copy the latest WAR and ZIP files into the `assets` folder
 ## Deployment
+> Setup your environment first
 ### Automated
+> You must be in a terminal pointed to the `challenge3` folder
+- Launch the `deploy.sh` script
 ### Manual
 #### Spinning up the training environment
 - Sign into [the AWS console](https://aws.amazon.com)
