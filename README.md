@@ -14,8 +14,7 @@ Deploy a WAR file + static content in AWS using CloudFormation.
 - Do it in AWS
 ## Prerequisites
 - 1 AWS account; you can create one for free [here](https://aws.amazon.com/free/)
-- 1 AWS S3 bucket named *elasticbeanstalk-companynews-ap-southeast-2*
-- Upload the WAR file *company-news.war* into the S3 bucket *elasticbeanstalk-companynews-ap-southeast-2*
+- Follow the environment setup procedure prior to your 1st deployment attempt
 ## Setting up your environment
 > I recommend using Linux; the instructions provided in this file are targeted at this line of OSes.
 > Windows users can either use the [Windows sub-system for Ubuntu](https://docs.microsoft.com/en-us/windows/wsl/install-win10) or install [Cygwin](https://cygwin.com).
