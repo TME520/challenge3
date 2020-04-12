@@ -29,8 +29,8 @@ Resources:
       - Namespace: aws:elasticbeanstalk:environment
         OptionName: EnvironmentType
         Value: LoadBalanced
-      SolutionStackName: companynews-prod-stack
-  sampleEnvironment:
+      SolutionStackName: "64bit Amazon Linux 2018.03 v3.3.4 running Tomcat 8.5 Java 8"
+  companyNewsEnvironment:
     Type: AWS::ElasticBeanstalk::Environment
     Properties:
       ApplicationName:

@@ -12,3 +12,6 @@ Deploy a WAR file + static content in AWS using CloudFormation.
 - Ext. lib: [Prevayler](http://prevayler.org)
 ## Extra instructions
 - Do it in AWS
+## Prerequisites
+- 1 AWS S3 bucket named *elasticbeanstalk-companynews-ap-southeast-2*
+- Upload the WAR file *company-news.war* into the S3 bucket *elasticbeanstalk-companynews-ap-southeast-2*
