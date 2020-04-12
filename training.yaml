@@ -3,13 +3,13 @@ Resources:
   companyNewsApplication:
     Type: AWS::ElasticBeanstalk::Application
     Properties:
-      Description: AWS Elastic Beanstalk Company News Production Application
+      Description: AWS Elastic Beanstalk Company News Training Application
   companyNewsVersion:
     Type: AWS::ElasticBeanstalk::ApplicationVersion
     Properties:
       ApplicationName:
         Ref: companyNewsApplication
-      Description: AWS ElasticBeanstalk Company News Production Application Version
+      Description: AWS ElasticBeanstalk Company News Training Application Version
       SourceBundle:
         S3Bucket: !Sub "elasticbeanstalk-companynews-${AWS::Region}"
         S3Key: company-news.war
@@ -18,24 +18,24 @@ Resources:
     Properties:
       ApplicationName:
         Ref: companyNewsApplication
-      Description: AWS ElasticBeanstalk Company News Production Configuration Template
+      Description: AWS ElasticBeanstalk Company News Training Configuration Template
       OptionSettings:
       - Namespace: aws:autoscaling:asg
         OptionName: MinSize
-        Value: '2'
+        Value: '1'
       - Namespace: aws:autoscaling:asg
         OptionName: MaxSize
-        Value: '6'
+        Value: '1'
       - Namespace: aws:elasticbeanstalk:environment
         OptionName: EnvironmentType
         Value: LoadBalanced
-      SolutionStackName: companynews-prod-stack
+      SolutionStackName: companynews-training-stack
   sampleEnvironment:
     Type: AWS::ElasticBeanstalk::Environment
     Properties:
       ApplicationName:
         Ref: companyNewsApplication
-      Description: AWS ElasticBeanstalk Company News Production Environment
+      Description: AWS ElasticBeanstalk Company News Training Environment
       TemplateName:
         Ref: companyNewsCnfTemplate
       VersionLabel:
