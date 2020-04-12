@@ -22,6 +22,17 @@ Deploy a WAR file + static content in AWS using CloudFormation.
 - Clone the [challenge3 GitHub repository](https://github.com/TME520/challenge3): `git clone https://github.com/TME520/challenge3.git`
 - Open a terminal and move to the `challenge3` folder
 - Copy the latest WAR and ZIP files into the `assets` folder
+## Guiding principles
+- Keep it simple: less is more, especially in terms of maintenance and pricing. Something that is easy to understand is easier to maintain and grow,
+- Use managed services: maintenance, updates, security are all now under the responsibility of the provider, not you. It saves a lot of toil and frees up time for innovation.
+## Architecture
+### Components
+- 1 Elastic Beanstalk (running the WAR file)
+- 1 S3 bucket (hosting static content from the ZIP file)
+- 1 S3 bucket (holding the WAR file to be deployed in Elastic Beanstalk)
+- 1 Elastic File System (used by `companyNews` running on Elastic Beanstalk for data persistence)
+### Available improvements
+- Depending on how the static assets are used, it might be interesting to add a CloudFront distribution sourcing the S3 bucket hosting these assets.
 ## Deployment
 > Setup your environment first
 ### Automated
