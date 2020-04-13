@@ -2,10 +2,6 @@ AWSTemplateFormatVersion: '2010-09-09'
 Description: >-
   AWS CloudFormation Template "training": This CloudFormation template creates 1 Elastic Beanstalk stack runnning TOMCAT.
 Parameters:
-  BucketName:
-    Description: The name of the S3 Bucket to create
-    Type: String
-    Default: company-news-static-assets-training
   EnvironmentName:
     Description: An environment name that will be added to resource descriptions
     Type: String
@@ -29,7 +25,7 @@ Resources:
         Ref: companyNewsApplication
       Description: AWS ElasticBeanstalk Company News ${EnvironmentName} Application Version
       SourceBundle:
-        S3Bucket: !Sub "elasticbeanstalk-companynews-${EnvironmentLocation}"
+        S3Bucket: !ImportValue BucketNameWAR
         S3Key: company-news.war
   companyNewsCnfTemplate:
     Type: AWS::ElasticBeanstalk::ConfigurationTemplate

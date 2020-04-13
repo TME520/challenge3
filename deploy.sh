@@ -14,7 +14,8 @@ export BUCKETNAMEZIP=""
 echo "[INFO] Step 1: Create S3 buckets"
 
 echo "[INFO] Step 2: Copy files to S3"
-aws s3 cp ./assets/company-news.war s3://elasticbeanstalk-ap-southeast-2-039904826260
+aws s3 cp ./assets/company-news.war s3://company-news-static-assets-training/
+aws s3 cp ./assets/company-news.war s3://company-news-war-training/
 
 echo "[INFO] Step 3: Deploy companyNews"
 

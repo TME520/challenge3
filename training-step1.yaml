@@ -76,6 +76,13 @@ Resources:
                 - /*
       Bucket: !Ref S3BucketZIP
 Outputs:
+  BucketNameWAR:
+    Value: !Sub
+        - ${BucketNameWAR}
+        - { BucketNameWAR: !Ref BucketNameWAR }
+    Export:
+      Name: BucketNameWAR
+    Description: The name of the S3 Bucket hosting the WAR file used with Elastic Beanstalk
   WebsiteURL:
     Value: !GetAtt 
       - S3BucketZIP
@@ -89,7 +96,14 @@ Outputs:
           - S3BucketZIP
           - DomainName
     Description: Name of S3 bucket to hold website content
-  warFileURL:
+  BucketNameZIP:
+    Value: !Sub
+        - ${BucketNameZIP}
+        - { BucketNameZIP: !Ref BucketNameZIP }
+    Export:
+      Name: BucketNameWAR
+    Description: The name of the S3 Bucket hosting the static content
+    warFileURL:
     Value: !GetAtt 
       - S3BucketWAR
       - WebsiteURL
