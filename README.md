@@ -68,7 +68,8 @@ region = ap-southeast-2
 - Once the deployment is over, go to S3, 2 S3 buckets should now have been created: *company-news-war-training* and *company-news-static-assets-training* (you can change their names at the beginning of the deployment, but don't do that unless strictly necessary)
 - If that's not already done, open a terminal and go to the challenge3/assets folder
 - Unzip the ZIP archive
-- Copy the files to the S3 bucket named *company-news-static-assets-training*: `aws s3 cp ./* s3://company-news-static-assets-training/`
+- Copy the files to the S3 bucket named *company-news-static-assets-training*: `aws s3 cp --exclude *.war ./* s3://company-news-static-assets-training/`
+- Now, copy the WAR file `company-news.war` to its S3 bucket named *company-news-war-training*: `aws s3 cp ./company-news.war s3://company-news-war-training/`
 - Go back to CloudFormation
 - Click on *Create stack*
 - Select *Upload a template file*
@@ -93,7 +94,8 @@ region = ap-southeast-2
 - Once the deployment is over, go to S3, 2 S3 buckets should now have been created: *company-news-war-production* and *company-news-static-assets-production* (you can change their names at the beginning of the deployment, but don't do that unless strictly necessary)
 - If that's not already done, open a terminal and go to the challenge3/assets folder
 - Unzip the ZIP archive
-- Copy the files to the S3 bucket named *company-news-static-assets-production*: `aws s3 cp ./* s3://company-news-static-assets-production/`
+- Copy the files to the S3 bucket named *company-news-static-assets-production*: `aws s3 cp --exclude *.war ./* s3://company-news-static-assets-production/`
+- Now, copy the WAR file `company-news.war` to its S3 bucket named *company-news-war-production*: `aws s3 cp ./company-news.war s3://company-news-war-production/`
 - Go back to CloudFormation
 - Click on *Create stack*
 - Select *Upload a template file*

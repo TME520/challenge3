@@ -103,7 +103,7 @@ Outputs:
     Export:
       Name: BucketNameWAR
     Description: The name of the S3 Bucket hosting the static content
-    warFileURL:
+  warFileURL:
     Value: !GetAtt 
       - S3BucketWAR
       - WebsiteURL
