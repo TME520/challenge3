@@ -53,6 +53,7 @@ region = ap-southeast-2
 > You must be in a terminal pointed to the `challenge3` folder
 - Launch the `deploy.sh` script
 ### Manual
+> Make sure the latest WAR and ZIP files are in the `assets` folder.
 #### Spinning up the training environment
 - Sign into [the AWS console](https://aws.amazon.com)
 - Go to CloudFormation
@@ -61,9 +62,24 @@ region = ap-southeast-2
 - Click on *Choose file*
 - Select *training-step1.yaml*
 - Click *Next*
-- Enter *company-news-training* in *Stack name*
+- Enter *company-news-training-step1* in *Stack name*
 - Click *Next* twice
 - Click on *Create stack*
+- Once the deployment is over, go to S3, 2 S3 buckets should now have been created: *company-news-war-training* and *company-news-static-assets-training* (you can change their names at the beginning of the deployment, but don't do that unless strictly necessary)
+- If that's not already done, open a terminal and go to the challenge2/assets folder
+- Unzip the ZIP archive
+- Copy the files to the S3 bucket named *company-news-static-assets-training*: `aws s3 cp ./* s3://company-news-static-assets-training/`
+- Go back to CloudFormation
+- Click on *Create stack*
+- Select *Upload a template file*
+- Click on *Choose file*
+- Select *training-step2.yaml*
+- Click *Next*
+- Enter *company-news-training-step2* in *Stack name*
+- Click *Next* twice
+- Click on *Create stack*
+- Once that second part of the deployment is over, *companyNews* is online.
+
 #### Spinning up the production environment
 - Sign into [the AWS console](https://aws.amazon.com)
 - Go to CloudFormation
