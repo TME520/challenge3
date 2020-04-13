@@ -66,7 +66,7 @@ region = ap-southeast-2
 - Click *Next* twice
 - Click on *Create stack*
 - Once the deployment is over, go to S3, 2 S3 buckets should now have been created: *company-news-war-training* and *company-news-static-assets-training* (you can change their names at the beginning of the deployment, but don't do that unless strictly necessary)
-- If that's not already done, open a terminal and go to the challenge2/assets folder
+- If that's not already done, open a terminal and go to the challenge3/assets folder
 - Unzip the ZIP archive
 - Copy the files to the S3 bucket named *company-news-static-assets-training*: `aws s3 cp ./* s3://company-news-static-assets-training/`
 - Go back to CloudFormation
@@ -79,7 +79,6 @@ region = ap-southeast-2
 - Click *Next* twice
 - Click on *Create stack*
 - Once that second part of the deployment is over, *companyNews* is online.
-
 #### Spinning up the production environment
 - Sign into [the AWS console](https://aws.amazon.com)
 - Go to CloudFormation
@@ -91,6 +90,20 @@ region = ap-southeast-2
 - Enter *company-news-production* in *Stack name*
 - Click *Next* twice
 - Click on *Create stack*
+- Once the deployment is over, go to S3, 2 S3 buckets should now have been created: *company-news-war-production* and *company-news-static-assets-production* (you can change their names at the beginning of the deployment, but don't do that unless strictly necessary)
+- If that's not already done, open a terminal and go to the challenge3/assets folder
+- Unzip the ZIP archive
+- Copy the files to the S3 bucket named *company-news-static-assets-production*: `aws s3 cp ./* s3://company-news-static-assets-production/`
+- Go back to CloudFormation
+- Click on *Create stack*
+- Select *Upload a template file*
+- Click on *Choose file*
+- Select *production-step2.yaml*
+- Click *Next*
+- Enter *company-news-production-step2* in *Stack name*
+- Click *Next* twice
+- Click on *Create stack*
+- Once that second part of the deployment is over, *companyNews* is online.
 ## Greetings
 ### cfn-python-lint: A CloudFormation Linter
 > Validate CloudFormation yaml/json templates against the CloudFormation spec and additional checks. Includes checking valid values for resource properties and best practices.
