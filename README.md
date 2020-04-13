@@ -8,7 +8,7 @@ Deploy a WAR file + static content in AWS using CloudFormation.
 - 1 ZIP file for static assets
 - 1 WAR file for dynamic assets
 - ZIP & WAR on separate servers
-- App name: *CompanyNews*
+- App name: *companyNews*
 - Ext. lib: [Prevayler](http://prevayler.org)
 ## Extra instructions
 - Do it in AWS
