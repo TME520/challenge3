@@ -8,4 +8,14 @@
 # The ZIP file will be unzipped and its content copied to a S3 bucket with public hosting enabled. #
 ####################################################################################################
 
+export BUCKETNAMEWAR=""
+export BUCKETNAMEZIP=""
+
+echo "[INFO] Step 1: Create S3 buckets"
+
+echo "[INFO] Step 2: Copy files to S3"
+aws s3 cp ./assets/company-news.war s3://elasticbeanstalk-ap-southeast-2-039904826260
+
+echo "[INFO] Step 3: Deploy companyNews"
+
 exit 0
