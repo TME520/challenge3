@@ -43,6 +43,7 @@ region = ap-southeast-2
 - 1 Elastic Beanstalk (running the WAR file)
 - 1 S3 bucket (hosting static content from the ZIP file)
 - 1 S3 bucket (holding the WAR file to be deployed in Elastic Beanstalk)
+- 1 S3 bucket created by AWS CloudFormation to store the templates
 - 1 Elastic File System (used by `companyNews` running on Elastic Beanstalk for data persistence)
 ### Available improvements
 - Depending on how the static assets are used, it might be interesting to add a CloudFront distribution sourcing the S3 bucket hosting these assets.
@@ -74,3 +75,7 @@ region = ap-southeast-2
 - Enter *company-news-production* in *Stack name*
 - Click *Next* twice
 - Click on *Create stack*
+## Greetings
+### cfn-python-lint: A CloudFormation Linter
+> Validate CloudFormation yaml/json templates against the CloudFormation spec and additional checks. Includes checking valid values for resource properties and best practices.
+[cfn-python-lint](https://github.com/aws-cloudformation/cfn-python-lint) saved me a lot of time by pointing directly to mistakes in my CloudFormation templates.

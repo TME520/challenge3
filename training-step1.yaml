@@ -2,8 +2,12 @@ AWSTemplateFormatVersion: '2010-09-09'
 Description: >-
   AWS CloudFormation Template "training": This CloudFormation template creates 2 S3 bucket for WAR + static content.
 Parameters:
-  BucketName:
-    Description: The name of the S3 Bucket to create
+  BucketNameWAR:
+    Description: The name of the S3 Bucket to create for WAR storage
+    Type: String
+    Default: company-news-war-training
+  BucketNameZIP:
+    Description: The name of the S3 Bucket to create for unzipped static assets storage
     Type: String
     Default: company-news-static-assets-training
   EnvironmentName:
@@ -18,19 +22,19 @@ Parameters:
     Type: String
     Default: ap-southeast-2
 Resources:
-  S3Bucket:
+  S3BucketWAR:
     Type: AWS::S3::Bucket
     Properties:
       AccessControl: PublicRead
-      WebsiteConfiguration:
-        IndexDocument: index.html
-        ErrorDocument: error.html
+      BucketName: !Sub
+        - ${BucketNameWAR}
+        - { BucketNameWAR: !Ref BucketNameWAR }
     DeletionPolicy: Retain
-  BucketPolicy:
+  BucketPolicyWAR:
     Type: AWS::S3::BucketPolicy
     Properties:
       PolicyDocument:
-        Id: MyPolicy
+        Id: policyForWARBucket
         Version: 2012-10-17
         Statement:
           - Sid: PublicReadForGetBucketObjects
@@ -40,20 +44,61 @@ Resources:
             Resource: !Join 
               - ''
               - - 'arn:aws:s3:::'
-                - !Ref S3Bucket
+                - !Ref S3BucketWAR
                 - /*
-      Bucket: !Ref S3Bucket
+      Bucket: !Ref S3BucketWAR
+  S3BucketZIP:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccessControl: PublicRead
+      BucketName: !Sub
+        - ${BucketNameZIP}
+        - { BucketNameZIP: !Ref BucketNameZIP }
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: error.html
+    DeletionPolicy: Retain
+  BucketPolicyZIP:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      PolicyDocument:
+        Id: policyForZIPBucket
+        Version: 2012-10-17
+        Statement:
+          - Sid: PublicReadForGetBucketObjects
+            Effect: Allow
+            Principal: '*'
+            Action: 's3:GetObject'
+            Resource: !Join 
+              - ''
+              - - 'arn:aws:s3:::'
+                - !Ref S3BucketZIP
+                - /*
+      Bucket: !Ref S3BucketZIP
 Outputs:
   WebsiteURL:
     Value: !GetAtt 
-      - S3Bucket
+      - S3BucketZIP
       - WebsiteURL
     Description: URL for website hosted on S3
-  S3BucketSecureURL:
+  S3BucketZIPSecureURL:
     Value: !Join 
       - ''
       - - 'https://'
         - !GetAtt 
-          - S3Bucket
+          - S3BucketZIP
           - DomainName
     Description: Name of S3 bucket to hold website content
+  warFileURL:
+    Value: !GetAtt 
+      - S3BucketWAR
+      - WebsiteURL
+    Description: URL for WAR file hosted on S3
+  S3BucketWARSecureURL:
+    Value: !Join 
+      - ''
+      - - 'https://'
+        - !GetAtt 
+          - S3BucketWAR
+          - DomainName
+    Description: Name of S3 bucket to hold WAR file
