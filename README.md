@@ -28,6 +28,13 @@ Deploy a WAR file + static content in AWS using CloudFormation.
 - Go to IAM
 - Create a new user named `s3uploader` and give it `AmazonS3FullAccess`
 - Keep note of the access key that will be generated automatically at the end of the user creation process. That key will be used to upload assets to S3 buckets.
+- These credentials have to go in the file `$HOME/.aws/credentials`
+```
+[default]
+aws_access_key_id = AAAABBBBCCCCDDDD
+aws_secret_access_key = EEEEFFFFGGGGHHHH
+region = ap-southeast-2
+```
 ## Guiding principles
 - Keep it simple: less is more, especially in terms of maintenance and pricing. Something that is easy to understand is easier to maintain and grow,
 - Use managed services: maintenance, updates, security are all now under the responsibility of the provider, not you. It saves a lot of toil and frees up time for innovation.
