@@ -78,4 +78,5 @@ region = ap-southeast-2
 ## Greetings
 ### cfn-python-lint: A CloudFormation Linter
 > Validate CloudFormation yaml/json templates against the CloudFormation spec and additional checks. Includes checking valid values for resource properties and best practices.
+
 [cfn-python-lint](https://github.com/aws-cloudformation/cfn-python-lint) saved me a lot of time by pointing directly to mistakes in my CloudFormation templates.
