@@ -45,7 +45,7 @@ Deploy a WAR file + static content in AWS using CloudFormation.
 - Click on *Create stack*
 - Select *Upload a template file*
 - Click on *Choose file*
-- Select *training.yaml*
+- Select *training-step1.yaml*
 - Click *Next*
 - Enter *company-news-training* in *Stack name*
 - Click *Next* twice
@@ -56,7 +56,7 @@ Deploy a WAR file + static content in AWS using CloudFormation.
 - Click on *Create stack*
 - Select *Upload a template file*
 - Click on *Choose file*
-- Select *production.yaml*
+- Select *production-step1.yaml*
 - Click *Next*
 - Enter *company-news-production* in *Stack name*
 - Click *Next* twice
