@@ -18,10 +18,16 @@ Deploy a WAR file + static content in AWS using CloudFormation.
 ## Setting up your environment
 > I recommend using Linux; the instructions provided in this file are targeted at this line of OSes.
 > Windows users can either use the [Windows sub-system for Ubuntu](https://docs.microsoft.com/en-us/windows/wsl/install-win10) or install [Cygwin](https://cygwin.com).
+### Local environment
 - Install [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
 - Clone the [challenge3 GitHub repository](https://github.com/TME520/challenge3): `git clone https://github.com/TME520/challenge3.git`
 - Open a terminal and move to the `challenge3` folder
 - Copy the latest WAR and ZIP files into the `assets` folder
+### AWS user
+- Sign into [the AWS console](https://aws.amazon.com)
+- Go to IAM
+- Create a new user named `s3uploader` and give it `AmazonS3FullAccess`
+- Keep note of the access key that will be generated automatically at the end of the user creation process. That key will be used to upload assets to S3 buckets.
 ## Guiding principles
 - Keep it simple: less is more, especially in terms of maintenance and pricing. Something that is easy to understand is easier to maintain and grow,
 - Use managed services: maintenance, updates, security are all now under the responsibility of the provider, not you. It saves a lot of toil and frees up time for innovation.
